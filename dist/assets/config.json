@@ -1,0 +1,16 @@
+{
+    "apiUrl": "http://172.31.27.75:93",
+    "ClientName": "Hyva",
+    "IconFileName": "favicon.png",
+    "LogoFileName": "logo.jpeg",
+    "ProjectName": "Hyva",
+    "Login": "login",
+    "GetShipmentsByInvoiceNumber": "api/Shipments/GetByInvoiceNumber",
+    "PostGateEntry": "api/GateEntries/PostGateEntry",
+    "GetGateEntriesByGateEntryNumber": "api/GateEntries/GetByGateEntryNumber",
+    "PostReceipt": "api/Receipt/PostReceipt",
+    "GetAllPurchaseOrders": "api/PurchaseOrders/GetAllPurchaseOrders",
+    "PostShipment": "api/Shipments/PostShipment",
+    "GetAllShipments": "api/Shipments/GetAllShipments",
+    "GetDashboardData": "api/Dashboard/GetDashboardData"
+}

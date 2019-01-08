@@ -1,0 +1,36 @@
+import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { AuthService } from '../../auth.service';
+
+@Component({
+	// tslint:disable-next-line:component-selector
+	selector: 'cdk-user-menu',
+	templateUrl: './user-menu.component.html',
+	styleUrls: ['./user-menu.component.scss']
+})
+export class UserMenuComponent implements OnInit {
+	isOpen = false;
+
+	// currentUser = null;
+	// tslint:disable-next-line:indent
+	@Input() currentUser = null;
+	@HostListener('document:click', ['$event', '$event.target'])
+	onClick(event: MouseEvent, targetElement: HTMLElement) {
+		if (!targetElement) {
+			return;
+		}
+
+		const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+		if (!clickedInside) {
+			this.isOpen = false;
+		}
+	}
+
+
+	constructor(private elementRef: ElementRef,
+		public authService: AuthService) { }
+
+
+	ngOnInit() {
+	}
+
+}

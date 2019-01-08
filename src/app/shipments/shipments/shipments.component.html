@@ -1,0 +1,59 @@
+<div fxLayout="column" class="components-container-gt-xs" [ngClass.xs]="'components-container-xs'" fxLayoutGap="20px">
+
+	<div fxFlex class="table-component-holder mat-elevation-z4">
+		<mat-toolbar class="px-3 table-header">
+			<h1 class="mat-headline center-align">Shipments</h1>
+		</mat-toolbar>
+
+		<div class="table-container">
+			<div class="example-header" style="padding: 0 20px;">
+				<mat-form-field floatPlaceholder="never" style="color: black; width: 100%;">
+					<input matInput #filter placeholder="Filter by Invoice Number">
+				</mat-form-field>
+			</div>
+			<table matSort (matSortChange)="sortData($event)">
+				<thead>
+					<tr>
+						<th mat-sort-header="{{th.key}}" scope="col" *ngFor="let th of headers" [disabled]="th.key=='action'">{{th.name}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let row of rows let i=index">
+						<td [attr.data-label]="th.name" *ngFor="let th of headers">
+							<span *ngIf="th.key=='Date'">
+								{{row[th.key] | date:'yyyy-MM-dd hh:mm:ss'}}
+							</span>
+							<span *ngIf="th.key=='action' && (row.Lines?.length || 0)>0" (click)="openLines(row)" matTooltip="{{(row.Lines?.length || 0) + ' Lines'}}">
+								<i class="material-icons">
+									arrow_right_alt
+								</i>
+							</span>
+							<span *ngIf="th.key!='action' && th.key!='Date'">
+
+								{{row[th.key]}}
+
+								<!-- <mat-chip  (click)="findDuplicates(row)"
+									selected="true"
+									color="warn"  matTooltip="{{row['duplicate_applications'].length}} duplicate entries" matTooltipPosition="right" *ngIf="th.key=='applicationNumber' && row['duplicate_applications'] != 'undefined' && row['duplicate_applications'] && row['duplicate_applications'].length > 0" >
+									{{row['duplicate_applications'].length }}
+									</mat-chip> -->
+
+							</span>
+
+						</td>
+					</tr>
+					<tr *ngIf="rows?.length==0">
+						<td [colSpan]="headers.length" style="text-align: center;">
+							No records found
+						</td>
+					</tr>
+				</tbody>
+				<thead *matHeaderRowDef="displayedColumns"></thead>
+				<tr *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+			<mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="[1, 5, 10, 25, 50, 100]" (page)="next($event)">
+			</mat-paginator>
+
+		</div>
+	</div>
+</div>
